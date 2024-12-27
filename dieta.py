@@ -2,7 +2,7 @@ from gurobipy import Model, GRB, quicksum
 import pandas as pd
 
 # Carregar os dados do Excel
-data = pd.read_excel("alimentos.xlsx")
+data = pd.read_excel("alimentosTeste.xlsx")
 
 # Conjuntos
 alimentos = data['alimento'].tolist()
@@ -20,7 +20,7 @@ vitamina_c = data['vitamina_c'].tolist()
 zinco = data['zinco'].tolist()
 sodio = data['sodio'].tolist()
 preco = data['preco'].tolist()
-max_porcoes = data['max_porcoes'].tolist()
+max_porcoes = data['max_porcoes_dia'].tolist()
 max_dias = data['max_dias'].tolist()
 
 # Restrições nutricionais
