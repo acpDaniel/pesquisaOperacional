@@ -66,6 +66,7 @@ for nutriente in nutrientes:
         )
 
 #Restrições porções minimas de grupos alimentares
+#1-laticinios   2-frutas    3-horticolas    4-cereais_derivados_tuberculos  5-carne_peixe_ovos  6-leguminosas 7-oleos_gorduras
 min_porcoes_grupo = {
         1: 0,
         2: 0,
