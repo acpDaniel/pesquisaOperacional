@@ -1,124 +1,129 @@
-from gurobipy import Model, GRB, quicksum
 import pandas as pd
+from gurobipy import Model, GRB, quicksum
 
-# Carregar os dados do Excel
-data = pd.read_excel("alimentosTeste.xlsx")
+# Carregar os dados da planilha
+df = pd.read_excel("alimentosTeste.xlsx")
 
-# Conjuntos
-alimentos = data['alimento'].tolist()
-dias = range(7)  # Supondo 7 dias na semana
-refeicoes = range(3)  # 3 refeições por dia
+# Parâmetros do problema
+alimentos = df['alimento'].tolist() #alimentos da planilha
+dias = 7  # número de dias
+refeicoes = 3  # número de refeições por dia
+grupos = list(range(1, 8)) #quantidade de grupos
 
-# Parâmetros
-calorias = data['calorias'].tolist()
-carboidratos = data['carboidratos'].tolist()
-proteinas = data['proteinas'].tolist()
-gorduras = data['gorduras'].tolist()
-ferro = data['ferro'].tolist()
-magnesio = data['magnesio'].tolist()
-vitamina_c = data['vitamina_c'].tolist()
-zinco = data['zinco'].tolist()
-sodio = data['sodio'].tolist()
-preco = data['preco'].tolist()
-max_porcoes = data['max_porcoes_dia'].tolist()
-max_dias = data['max_dias'].tolist()
+# Nutrientes e limites
+nutrientes = ["calorias", "carboidratos", "proteinas", "gorduras", "ferro", "magnesio", "vitamina_c", "zinco", "sodio"]
+limites_nutrientes = {
+    "calorias": (3000, 5000),
+    "carboidratos": (450, 900),
+    "proteinas": (120, 150),
+    "gorduras": (70, 120),
+    "ferro": (8, 18),
+    "magnesio": (400, 420),
+    "vitamina_c": (75, 90),
+    "zinco": (11, 16),
+    "sodio": (3000, 7000)
+}
 
-# Restrições nutricionais
-nutrientes_min = [3000, 450, 120, 70, 8, 400, 75, 11, 3000]  # Calorias, carb, prot, gord, ferro, mag, vitC, zinco, sodio
-nutrientes_max = [5000, 900, 150, 120, 18, 420, 90, 11, 7000]
+# Dados das colunas da planilha
+calorias = df['calorias'].tolist()
+carboidratos = df['carboidratos'].tolist()
+proteinas = df['proteinas'].tolist()
+gorduras = df['gorduras'].tolist()
+ferro = df['ferro'].tolist()
+magnesio = df['magnesio'].tolist()
+vitamina_c = df['vitamina_c'].tolist()
+zinco = df['zinco'].tolist()
+sodio = df['sodio'].tolist()
+preco = df['preco'].tolist()
+max_porcoes = df['max_porcoes_dia'].tolist()
+max_dias = df['max_dias'].tolist()
+grupo = df['grupo'].tolist()
 
 # Modelo
-model = Model("Problema da dieta")
+model = Model("problemaDaDieta")
 
-# Variáveis
-X = model.addVars(len(alimentos), len(dias), len(refeicoes), vtype=GRB.INTEGER, name="X")
-Z = model.addVars(len(alimentos), len(dias), len(refeicoes), vtype=GRB.BINARY, name="Z")
-Y = model.addVars(len(alimentos), len(dias), vtype=GRB.BINARY, name="Y")
+# Variáveis de decisão
+X = model.addVars(len(alimentos), range(dias), range(refeicoes), vtype=GRB.INTEGER, name="X")
+Z = model.addVars(len(alimentos), range(dias), range(refeicoes), vtype=GRB.BINARY, name="Z")
+Y = model.addVars(len(alimentos), range(dias), vtype=GRB.BINARY, name="Y")
 
 # Função objetivo: minimizar o custo total
-print("Definindo a função objetivo...")
-model.setObjective(
-    quicksum(preco[i] * X[i, j, k] for i in range(len(alimentos)) for j in dias for k in refeicoes),
-    GRB.MINIMIZE
-)
+model.setObjective(quicksum(preco[i] * X[i,j,k] for i in range(len(alimentos)) for j in range(dias) for k in range(refeicoes)), GRB.MINIMIZE)
 
-# Restrições nutricionais por dia
-print("Adicionando restrições nutricionais por dia...")
-for j in dias:
-    for n, (nutr_min, nutr_max) in enumerate(zip(nutrientes_min, nutrientes_max)):
-        # Parte do lado esquerdo da restrição (LHS)
-        lhs_min = quicksum(
-            X[i, j, k] * [calorias, carboidratos, proteinas, gorduras, ferro, magnesio, vitamina_c, zinco, sodio][n][i]
-            for i in range(len(alimentos)) for k in refeicoes
-        )
-        # Print da restrição mínima
-        print(f"Dia {j + 1}, Nutriente {n} (min): {lhs_min} >= {nutr_min}")
-        model.addConstr(lhs_min >= nutr_min, name=f"Nut_Min_{n}_Dia_{j}")
-        
-        # Parte do lado esquerdo para a restrição máxima
-        lhs_max = quicksum(
-            X[i, j, k] * [calorias, carboidratos, proteinas, gorduras, ferro, magnesio, vitamina_c, zinco, sodio][n][i]
-            for i in range(len(alimentos)) for k in refeicoes
-        )
-        # Print da restrição máxima
-        print(f"Dia {j + 1}, Nutriente {n} (max): {lhs_max} <= {nutr_max}")
-        model.addConstr(lhs_max <= nutr_max, name=f"Nut_Max_{n}_Dia_{j}")
+#Restrições
 
-# Restrição: máximo de porções por alimento por refeição e dia
-print("Adicionando restrição de porções por alimento por refeição e dia...")
-for i in range(len(alimentos)):
-    for j in dias:
-        for k in refeicoes:
-            # Restrição por refeição
-            print(f"X[{i},{j},{k}] <= {max_porcoes[i]} * Z[{i},{j},{k}]")
-            model.addConstr(X[i, j, k] <= max_porcoes[i] * Z[i, j, k], name=f"Max_Porcoes_{i}_{j}_{k}")
-        # Restrição total por dia
-        print(f"Sum(X[{i},{j},k]) for k in refeicoes <= {max_porcoes[i]} * Y[{i},{j}]")
+#Restrições de quantidades de nutrientes
+for nutriente in nutrientes:
+    min_val, max_val = limites_nutrientes[nutriente]
+    for j in range(dias):
         model.addConstr(
-            quicksum(X[i, j, k] for k in refeicoes) <= max_porcoes[i] * Y[i, j],
-            name=f"Max_Porcoes_Total_{i}_{j}"
+            quicksum(df.loc[i, nutriente] * X[i, j, k] for i in range(len(alimentos)) for k in range(refeicoes)) >= min_val,
+            f"{nutriente}_min_dia_{j}"
         )
-
-# Restrição: limite máximo de dias que um alimento pode ser consumido
-print("Adicionando restrição de consumo máximo por dias...")
-for i in range(len(alimentos)):
-    # Restrição de limite de dias
-    print(f"Sum(Y[{i},j]) for j in dias <= {max_dias[i]}")
-    model.addConstr(quicksum(Y[i, j] for j in dias) <= max_dias[i], name=f"Max_Dias_{i}")
-
-# Restrição: consumo máximo de 2 refeições diárias por alimento
-print("Adicionando restrição de máximo de 2 refeições por dia por alimento...")
-for i in range(len(alimentos)):
-    for j in dias:
-        # Restrição por dia
-        print(f"Sum(Z[{i},{j},k]) for k in refeicoes <= 2 * Y[{i},{j}]")
         model.addConstr(
-            quicksum(Z[i, j, k] for k in refeicoes) <= 2 * Y[i, j],
-            name=f"Max_Refeicoes_{i}_{j}"
+            quicksum(df.loc[i, nutriente] * X[i, j, k] for i in range(len(alimentos)) for k in range(refeicoes)) <= max_val,
+            f"{nutriente}_max_dia_{j}"
         )
 
-# Restrição: limite total de porções diárias
-print("Adicionando restrição de limite total de porções diárias...")
-for j in dias:
-    # Restrição total de porções por dia
-    print(f"Sum(X[i,{j},k]) for i in alimentos, k in refeicoes <= 50")
+#Restrições porções minimas de grupos alimentares
+min_porcoes_grupo = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0,
+        7: 0
+    }
+
+for j in range(dias):
+    for g in grupos:
+        model.addConstr(
+            quicksum(X[i,j,k] for i in range(len(alimentos)) if grupo[i] == g for k in range(refeicoes)) >= min_porcoes_grupo[g],
+            f"min_porcoes_grupo_{g}_dia_{j}"
+        )
+
+# Restrições de máximo de porções por alimento i por dia
+for i in range(len(alimentos)):
+    for j in range(dias):
+        model.addConstr(
+            quicksum(X[i,j,k] for k in range(refeicoes)) <= Y[i,j] * max_porcoes[i],
+            f"max_porcoes_alimento_{i}_dia_{j}"
+        )
+
+# Restrição de quantidade máxima de dias que um alimento pode ser consumido em uma semana
+for i in range(len(alimentos)):
     model.addConstr(
-        quicksum(X[i, j, k] for i in range(len(alimentos)) for k in refeicoes) <= 50,
-        name=f"Max_Porcoes_Dia_{j}"
+        quicksum(Y[i,j] for j in range(dias)) <= max_dias[i],
+        f"max_dias_alimento_{i}"
     )
 
+# Restrição de que um alimento i pode ser usado em no máximo 2 refeições diárias
+for i in range(len(alimentos)):
+    for j in range(dias):
+        model.addConstr(
+            quicksum(Z[i,j,k] for k in range(refeicoes)) <= 2 * Y[i,j],
+            f"max_refeicoes_alimento_{i}_dia_{j}"
+        )
+
+# Restrição de limite total de 50 porções de alimento por dia
+for j in range(dias):
+    model.addConstr(
+        quicksum(X[i,j,k] for i in range(len(alimentos)) for k in range(refeicoes)) <= 50,
+        f"limite_total_porcoes_dia_{j}"
+    )
 
 # Resolver o modelo
-print("Otimizando o modelo...")
 model.optimize()
 
-# Imprimir solução
+# Verificar o status da solução
 if model.status == GRB.OPTIMAL:
-    print("Solução ótima encontrada:")
+    print("Solução ótima encontrada!")
     for i in range(len(alimentos)):
-        for j in dias:
-            for k in refeicoes:
-                if X[i, j, k].x > 0:
-                    print(f"Alimento: {alimentos[i]}, Dia: {j + 1}, Refeição: {k + 1}, Porções: {X[i, j, k].x}")
+        for j in range(dias):
+            for k in range(refeicoes):
+                if X[i,j,k].x > 0: #printa apenas as variáveis X que são diferentes de zero
+                    print(f"Alimento: {alimentos[i]}, Dia: {j+1}, Refeição: {k+1}, Porções: {X[i,j,k].x}")
+    print(f"\nCusto total da dieta: {model.objVal}")
 else:
-    print("Nenhuma solução ótima foi encontrada.")
+    print("Não foi possível encontrar uma solução ótima.")
