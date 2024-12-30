@@ -2,7 +2,7 @@ import pandas as pd
 from gurobipy import Model, GRB, quicksum
 
 # Carregar os dados da planilha
-df = pd.read_excel("alimentosTeste.xlsx")
+df = pd.read_excel("alimentosCompleto.xlsx")
 
 # Parâmetros do problema
 alimentos = df['alimento'].tolist() #alimentos da planilha
