@@ -142,6 +142,12 @@ for i in range(len(alimentos)):
             f"amarrar_Y_X_{i}_dia_{j}"
         )                    
 
+#Flag para ver mais logs
+model.setParam("OutputFlag", 1)
+
+#GAP aceitavel no resultado, se comentar aqui vai demorar muito tempo para a planilha completa
+model.setParam("MIPGap", 0.04)
+
 # Resolver o modelo
 model.optimize()
 
