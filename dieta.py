@@ -2,10 +2,10 @@ import pandas as pd
 from gurobipy import Model, GRB, quicksum
 
 # Carregar os dados da planilha
-df = pd.read_excel("alimentosCompleto.xlsx")
+df = pd.read_excel("alimentosTeste.xlsx")
 
 # Valor grande para M
-M = 1e6
+M = 1000
 
 # Parâmetros do problema
 alimentos = df['alimento'].tolist() #alimentos da planilha
@@ -24,7 +24,7 @@ limites_nutrientes = {
     "magnesio": (400, 420),
     "vitamina_c": (75, 90),
     "zinco": (11, 16),
-    "sodio": (3000, 7000)
+    "sodio": (1500, 5000)
 }
 
 # Dados das colunas da planilha
@@ -106,7 +106,7 @@ for i in range(len(alimentos)):
 for i in range(len(alimentos)):
     for j in range(dias):
         model.addConstr(
-            quicksum(Z[i,j,k] for k in range(refeicoes)) <= 2 * Y[i,j],
+            quicksum(Z[i,j,k] for k in range(refeicoes)) <= 1 * Y[i,j],
             f"max_refeicoes_alimento_{i}_dia_{j}"
         )
 
@@ -117,13 +117,37 @@ for j in range(dias):
         f"limite_total_porcoes_dia_{j}"
     )
 
-# Amarrar Z_{i,j,k} e Y_{i,j}
+# Garantir que em cada refeição pelo menos uma porção de alimento foi consumida
+for j in range(dias):
+    for k in range(refeicoes):
+        model.addConstr(
+            quicksum(X[i, j, k] for i in range(len(alimentos))) >= 1,
+            f"min_1_porção_consumida_dia_{j}_refeicao_{k}"
+        )
+
+# Amarrar Y_{i,j} e X_{i,j,k}
 for i in range(len(alimentos)):
     for j in range(dias):
         model.addConstr(
-            quicksum(Z[i, j, k] for k in range(refeicoes)) <= M * Y[i, j],
-            f"amarrar_Z_Y_{i}_dia_{j}"
-        )
+            quicksum(X[i, j, k] for k in range(refeicoes)) >= Y[i, j],
+            f"amarrar_Y_X_{i}_dia_{j}"
+        )               
+
+# # Garantir que pelo menos um alimento foi consumido em cada refeição de cada dia
+# for j in range(dias):  # Para cada dia
+#     for k in range(refeicoes):  # Para cada refeição
+#         model.addConstr(
+#             quicksum(Z[i, j, k] for i in range(len(alimentos))) >= 1,
+#             f"min_1_alimento_consumido_dia_{j}_refeicao_{k}"
+#         )    
+
+# # Amarrar Z_{i,j,k} e Y_{i,j}
+# for i in range(len(alimentos)):
+#     for j in range(dias):
+#         model.addConstr(
+#             quicksum(Z[i, j, k] for k in range(refeicoes)) <= M * Y[i, j],
+#             f"amarrar_Z_Y_{i}_dia_{j}"
+#         )
 
 # Amarrar Z_{i,j,k} e X_{i,j,k}
 for i in range(len(alimentos)):
@@ -134,19 +158,19 @@ for i in range(len(alimentos)):
                 f"amarrar_Z_X_{i}_dia_{j}_ref_{k}"
             )    
 
-# Amarrar Y_{i,j} e X_{i,j,k}
+
+# Amarrar Z_{i,j,k} e X_{i,j,k} para garantir que Z[i,j,k] = 0 se X[i,j,k] = 0
 for i in range(len(alimentos)):
     for j in range(dias):
-        model.addConstr(
-            quicksum(X[i, j, k] for k in range(refeicoes)) >= Y[i, j],
-            f"amarrar_Y_X_{i}_dia_{j}"
-        )                    
+        for k in range(refeicoes):
+            # Se Z[i,j,k] = 0, então X[i,j,k] = 0
+            model.addConstr(X[i, j, k] <= M * Z[i, j, k], f"Z_limita_X_{i}_dia_{j}_ref_{k}")                     
 
 #Flag para ver mais logs
-model.setParam("OutputFlag", 1)
+#model.setParam("OutputFlag", 1)
 
 #GAP aceitavel no resultado, se comentar aqui vai demorar muito tempo para a planilha completa
-model.setParam("MIPGap", 0.04)
+#model.setParam("MIPGap", 0.04)
 
 # Resolver o modelo
 model.optimize()
@@ -158,25 +182,30 @@ with open("resultado.txt", "w") as arquivo:
         arquivo.write("Solução ótima encontrada!\n")
         arquivo.write(f"Valor da função objetivo (custo total): {model.objVal}\n")
         
-        # Variáveis de decisão
-        arquivo.write("\nPorções consumidas por refeição (X[i,j,k]):\n")
-        for i in range(len(alimentos)):
-            for j in range(dias):
-                for k in range(refeicoes):
+        # Variáveis de decisão organizadas por dia e refeição
+        arquivo.write("\nPorções consumidas por refeição (organizado por dia e refeição):\n")
+        for j in range(dias):
+            for k in range(refeicoes):
+                arquivo.write(f"\nDia {j}, Refeição {k}:\n")
+                for i in range(len(alimentos)):
                     if X[i, j, k].x > 0:  # Mostrar apenas variáveis com valores positivos
-                        arquivo.write(f"Alimento {alimentos[i]} no dia {j}, refeição {k}: {X[i, j, k].x} porções\n")
+                        arquivo.write(f"  Alimento {alimentos[i]}: {X[i, j, k].x} porções\n")
         
+        # Dias em que os alimentos foram consumidos
         arquivo.write("\nDias em que os alimentos foram consumidos (Y[i,j]):\n")
-        for i in range(len(alimentos)):
-            for j in range(dias):
+        for j in range(dias):
+            arquivo.write(f"\nDia {j}:\n")
+            for i in range(len(alimentos)):
                 if Y[i, j].x > 0:
-                    arquivo.write(f"Alimento {alimentos[i]} foi consumido no dia {j}\n")
+                    arquivo.write(f"  Alimento {alimentos[i]}\n")
         
+        # Refeições em que os alimentos foram consumidos
         arquivo.write("\nRefeições em que os alimentos foram consumidos (Z[i,j,k]):\n")
-        for i in range(len(alimentos)):
-            for j in range(dias):
-                for k in range(refeicoes):
+        for j in range(dias):
+            for k in range(refeicoes):
+                arquivo.write(f"\nDia {j}, Refeição {k}:\n")
+                for i in range(len(alimentos)):
                     if Z[i, j, k].x > 0:
-                        arquivo.write(f"Alimento {alimentos[i]} foi consumido na refeição {k} do dia {j}\n")
+                        arquivo.write(f"  Alimento {alimentos[i]}\n")
     else:
         arquivo.write(f"Modelo não encontrado ou solução não ótima. Status: {model.status}\n")

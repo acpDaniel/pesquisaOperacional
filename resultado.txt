@@ -1,119 +1,214 @@
 Solução ótima encontrada!
-Valor da função objetivo (custo total): 326.94100000000003
+Valor da função objetivo (custo total): 291.90000000000003
 
-Porções consumidas por refeição (X[i,j,k]):
-Alimento farinhaDeTrigo no dia 0, refeição 0: 3.0 porções
-Alimento farinhaDeTrigo no dia 2, refeição 1: 3.0 porções
-Alimento farinhaDeTrigo no dia 4, refeição 0: 3.0 porções
-Alimento farinhaDeTrigo no dia 5, refeição 0: 3.0 porções
-Alimento cereais no dia 1, refeição 2: 7.0 porções
-Alimento cereais no dia 3, refeição 0: 7.0 porções
-Alimento cereais no dia 6, refeição 1: 8.0 porções
-Alimento abobora no dia 1, refeição 0: 2.0 porções
-Alimento abobora no dia 3, refeição 0: 1.0 porções
-Alimento beterraba no dia 1, refeição 0: 10.0 porções
-Alimento beterraba no dia 3, refeição 0: 10.0 porções
-Alimento mandioca no dia 0, refeição 2: 3.0 porções
-Alimento mandioca no dia 2, refeição 1: 3.0 porções
-Alimento mandioca no dia 4, refeição 1: 3.0 porções
-Alimento mandioca no dia 5, refeição 1: 3.0 porções
-Alimento mandioca no dia 6, refeição 2: 3.0 porções
-Alimento palmito no dia 0, refeição 0: 2.0 porções
-Alimento palmito no dia 0, refeição 2: 2.0 porções
-Alimento palmito no dia 2, refeição 0: 4.0 porções
-Alimento palmito no dia 4, refeição 0: 4.0 porções
-Alimento palmito no dia 5, refeição 0: 4.0 porções
-Alimento limao no dia 3, refeição 1: 1.0 porções
-Alimento limao no dia 6, refeição 1: 1.0 porções
-Alimento mexerica no dia 3, refeição 2: 1.0 porções
-Alimento tangerina no dia 1, refeição 1: 1.0 porções
-Alimento acucarCristal no dia 5, refeição 0: 1.0 porções
-Alimento acucarRefinado no dia 0, refeição 0: 1.0 porções
-Alimento acucarRefinado no dia 2, refeição 1: 1.0 porções
-Alimento acucarRefinado no dia 4, refeição 1: 1.0 porções
-Alimento feijao no dia 6, refeição 2: 1.0 porções
-Alimento ovo no dia 0, refeição 0: 7.0 porções
-Alimento ovo no dia 1, refeição 2: 6.0 porções
-Alimento ovo no dia 2, refeição 0: 7.0 porções
-Alimento ovo no dia 3, refeição 0: 6.0 porções
-Alimento ovo no dia 4, refeição 2: 7.0 porções
-Alimento ovo no dia 5, refeição 1: 7.0 porções
-Alimento ovo no dia 6, refeição 2: 6.0 porções
+Porções consumidas por refeição (organizado por dia e refeição):
+
+Dia 0, Refeição 0:
+  Alimento cereais: 3.0 porções
+  Alimento abobora: 6.0 porções
+
+Dia 0, Refeição 1:
+  Alimento arroz: 2.0 porções
+
+Dia 0, Refeição 2:
+  Alimento batataBaroa: 2.0 porções
+  Alimento ovo: 6.0 porções
+
+Dia 1, Refeição 0:
+  Alimento cereais: 3.0 porções
+  Alimento abobora: 6.0 porções
+
+Dia 1, Refeição 1:
+  Alimento arroz: 2.0 porções
+
+Dia 1, Refeição 2:
+  Alimento batataBaroa: 2.0 porções
+  Alimento ovo: 6.0 porções
+
+Dia 2, Refeição 0:
+  Alimento cereais: 3.0 porções
+
+Dia 2, Refeição 1:
+  Alimento arroz: 2.0 porções
+  Alimento ovo: 6.0 porções
+
+Dia 2, Refeição 2:
+  Alimento abobora: 6.0 porções
+  Alimento batataBaroa: 2.0 porções
+
+Dia 3, Refeição 0:
+  Alimento cereais: 3.0 porções
+  Alimento batataBaroa: 2.0 porções
+
+Dia 3, Refeição 1:
+  Alimento arroz: 2.0 porções
+  Alimento ovo: 6.0 porções
+
+Dia 3, Refeição 2:
+  Alimento abobora: 6.0 porções
+
+Dia 4, Refeição 0:
+  Alimento cereais: 3.0 porções
+
+Dia 4, Refeição 1:
+  Alimento arroz: 2.0 porções
+  Alimento ovo: 6.0 porções
+
+Dia 4, Refeição 2:
+  Alimento abobora: 6.0 porções
+  Alimento batataBaroa: 2.0 porções
+
+Dia 5, Refeição 0:
+  Alimento cereais: 3.0 porções
+
+Dia 5, Refeição 1:
+  Alimento arroz: 2.0 porções
+  Alimento ovo: 6.0 porções
+
+Dia 5, Refeição 2:
+  Alimento abobora: 6.0 porções
+  Alimento batataBaroa: 2.0 porções
+
+Dia 6, Refeição 0:
+  Alimento cereais: 3.0 porções
+
+Dia 6, Refeição 1:
+  Alimento arroz: 1.0 porções
+
+Dia 6, Refeição 2:
+  Alimento arroz: 1.0 porções
+  Alimento abobora: 6.0 porções
+  Alimento batataBaroa: 2.0 porções
+  Alimento ovo: 6.0 porções
 
 Dias em que os alimentos foram consumidos (Y[i,j]):
-Alimento farinhaDeTrigo foi consumido no dia 0
-Alimento farinhaDeTrigo foi consumido no dia 2
-Alimento farinhaDeTrigo foi consumido no dia 4
-Alimento farinhaDeTrigo foi consumido no dia 5
-Alimento cereais foi consumido no dia 1
-Alimento cereais foi consumido no dia 3
-Alimento cereais foi consumido no dia 6
-Alimento abobora foi consumido no dia 1
-Alimento abobora foi consumido no dia 3
-Alimento beterraba foi consumido no dia 1
-Alimento beterraba foi consumido no dia 3
-Alimento mandioca foi consumido no dia 0
-Alimento mandioca foi consumido no dia 2
-Alimento mandioca foi consumido no dia 4
-Alimento mandioca foi consumido no dia 5
-Alimento mandioca foi consumido no dia 6
-Alimento palmito foi consumido no dia 0
-Alimento palmito foi consumido no dia 2
-Alimento palmito foi consumido no dia 4
-Alimento palmito foi consumido no dia 5
-Alimento limao foi consumido no dia 3
-Alimento limao foi consumido no dia 6
-Alimento mexerica foi consumido no dia 3
-Alimento tangerina foi consumido no dia 1
-Alimento acucarCristal foi consumido no dia 5
-Alimento acucarRefinado foi consumido no dia 0
-Alimento acucarRefinado foi consumido no dia 2
-Alimento acucarRefinado foi consumido no dia 4
-Alimento feijao foi consumido no dia 6
-Alimento ovo foi consumido no dia 0
-Alimento ovo foi consumido no dia 1
-Alimento ovo foi consumido no dia 2
-Alimento ovo foi consumido no dia 3
-Alimento ovo foi consumido no dia 4
-Alimento ovo foi consumido no dia 5
-Alimento ovo foi consumido no dia 6
+
+Dia 0:
+  Alimento arroz
+  Alimento cereais
+  Alimento abobora
+  Alimento batataBaroa
+  Alimento ovo
+
+Dia 1:
+  Alimento arroz
+  Alimento cereais
+  Alimento abobora
+  Alimento batataBaroa
+  Alimento ovo
+
+Dia 2:
+  Alimento arroz
+  Alimento cereais
+  Alimento abobora
+  Alimento batataBaroa
+  Alimento ovo
+
+Dia 3:
+  Alimento arroz
+  Alimento cereais
+  Alimento abobora
+  Alimento batataBaroa
+  Alimento ovo
+
+Dia 4:
+  Alimento arroz
+  Alimento cereais
+  Alimento abobora
+  Alimento batataBaroa
+  Alimento ovo
+
+Dia 5:
+  Alimento arroz
+  Alimento cereais
+  Alimento abobora
+  Alimento batataBaroa
+  Alimento ovo
+
+Dia 6:
+  Alimento arroz
+  Alimento arroz
+  Alimento cereais
+  Alimento abobora
+  Alimento batataBaroa
+  Alimento ovo
 
 Refeições em que os alimentos foram consumidos (Z[i,j,k]):
-Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 0
-Alimento farinhaDeTrigo foi consumido na refeição 1 do dia 2
-Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 4
-Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 5
-Alimento cereais foi consumido na refeição 2 do dia 1
-Alimento cereais foi consumido na refeição 0 do dia 3
-Alimento cereais foi consumido na refeição 1 do dia 6
-Alimento abobora foi consumido na refeição 0 do dia 1
-Alimento abobora foi consumido na refeição 0 do dia 3
-Alimento abobora foi consumido na refeição 1 do dia 3
-Alimento beterraba foi consumido na refeição 0 do dia 1
-Alimento beterraba foi consumido na refeição 0 do dia 3
-Alimento mandioca foi consumido na refeição 2 do dia 0
-Alimento mandioca foi consumido na refeição 1 do dia 2
-Alimento mandioca foi consumido na refeição 1 do dia 4
-Alimento mandioca foi consumido na refeição 1 do dia 5
-Alimento mandioca foi consumido na refeição 1 do dia 6
-Alimento mandioca foi consumido na refeição 2 do dia 6
-Alimento palmito foi consumido na refeição 0 do dia 0
-Alimento palmito foi consumido na refeição 2 do dia 0
-Alimento palmito foi consumido na refeição 0 do dia 2
-Alimento palmito foi consumido na refeição 0 do dia 4
-Alimento palmito foi consumido na refeição 0 do dia 5
-Alimento limao foi consumido na refeição 0 do dia 6
-Alimento limao foi consumido na refeição 1 do dia 6
-Alimento acucarCristal foi consumido na refeição 0 do dia 5
-Alimento acucarRefinado foi consumido na refeição 0 do dia 0
-Alimento acucarRefinado foi consumido na refeição 0 do dia 4
-Alimento acucarRefinado foi consumido na refeição 1 do dia 4
-Alimento feijao foi consumido na refeição 2 do dia 6
-Alimento ovo foi consumido na refeição 0 do dia 0
-Alimento ovo foi consumido na refeição 2 do dia 0
-Alimento ovo foi consumido na refeição 2 do dia 1
-Alimento ovo foi consumido na refeição 0 do dia 2
-Alimento ovo foi consumido na refeição 0 do dia 3
-Alimento ovo foi consumido na refeição 2 do dia 4
-Alimento ovo foi consumido na refeição 1 do dia 5
-Alimento ovo foi consumido na refeição 2 do dia 6
+
+Dia 0, Refeição 0:
+  Alimento cereais
+  Alimento abobora
+
+Dia 0, Refeição 1:
+  Alimento arroz
+
+Dia 0, Refeição 2:
+  Alimento batataBaroa
+  Alimento ovo
+
+Dia 1, Refeição 0:
+  Alimento cereais
+  Alimento abobora
+
+Dia 1, Refeição 1:
+  Alimento arroz
+
+Dia 1, Refeição 2:
+  Alimento batataBaroa
+  Alimento ovo
+
+Dia 2, Refeição 0:
+  Alimento cereais
+
+Dia 2, Refeição 1:
+  Alimento arroz
+  Alimento ovo
+
+Dia 2, Refeição 2:
+  Alimento abobora
+  Alimento batataBaroa
+
+Dia 3, Refeição 0:
+  Alimento cereais
+  Alimento batataBaroa
+
+Dia 3, Refeição 1:
+  Alimento arroz
+  Alimento ovo
+
+Dia 3, Refeição 2:
+  Alimento abobora
+
+Dia 4, Refeição 0:
+  Alimento cereais
+
+Dia 4, Refeição 1:
+  Alimento arroz
+  Alimento ovo
+
+Dia 4, Refeição 2:
+  Alimento abobora
+  Alimento batataBaroa
+
+Dia 5, Refeição 0:
+  Alimento cereais
+
+Dia 5, Refeição 1:
+  Alimento arroz
+  Alimento ovo
+
+Dia 5, Refeição 2:
+  Alimento abobora
+  Alimento batataBaroa
+
+Dia 6, Refeição 0:
+  Alimento cereais
+
+Dia 6, Refeição 1:
+  Alimento arroz
+
+Dia 6, Refeição 2:
+  Alimento arroz
+  Alimento abobora
+  Alimento batataBaroa
+  Alimento ovo
