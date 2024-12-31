@@ -1,0 +1,190 @@
+Solução ótima encontrada!
+Valor da função objetivo (custo total): 221.73199999999997
+
+Porções consumidas por refeição (X[i,j,k]):
+Alimento farinhaDeTrigo no dia 0, refeição 1: 5.0 porções
+Alimento farinhaDeTrigo no dia 1, refeição 1: 5.0 porções
+Alimento farinhaDeTrigo no dia 2, refeição 1: 5.0 porções
+Alimento farinhaDeTrigo no dia 3, refeição 1: 5.0 porções
+Alimento farinhaDeTrigo no dia 4, refeição 1: 5.0 porções
+Alimento farinhaDeTrigo no dia 5, refeição 1: 5.0 porções
+Alimento farinhaDeTrigo no dia 6, refeição 1: 5.0 porções
+Alimento abobora no dia 0, refeição 0: 1.0 porções
+Alimento abobora no dia 0, refeição 1: 5.0 porções
+Alimento abobora no dia 1, refeição 0: 1.0 porções
+Alimento abobora no dia 1, refeição 1: 5.0 porções
+Alimento abobora no dia 2, refeição 0: 1.0 porções
+Alimento abobora no dia 2, refeição 1: 5.0 porções
+Alimento abobora no dia 3, refeição 0: 1.0 porções
+Alimento abobora no dia 3, refeição 1: 5.0 porções
+Alimento abobora no dia 4, refeição 0: 1.0 porções
+Alimento abobora no dia 4, refeição 1: 5.0 porções
+Alimento abobora no dia 5, refeição 0: 1.0 porções
+Alimento abobora no dia 5, refeição 1: 5.0 porções
+Alimento abobora no dia 6, refeição 0: 1.0 porções
+Alimento abobora no dia 6, refeição 1: 5.0 porções
+Alimento beterraba no dia 0, refeição 1: 1.0 porções
+Alimento beterraba no dia 1, refeição 1: 1.0 porções
+Alimento beterraba no dia 2, refeição 2: 1.0 porções
+Alimento beterraba no dia 3, refeição 2: 1.0 porções
+Alimento beterraba no dia 4, refeição 2: 1.0 porções
+Alimento beterraba no dia 5, refeição 2: 1.0 porções
+Alimento beterraba no dia 6, refeição 2: 1.0 porções
+Alimento palmito no dia 0, refeição 0: 2.0 porções
+Alimento palmito no dia 0, refeição 2: 2.0 porções
+Alimento palmito no dia 1, refeição 1: 2.0 porções
+Alimento palmito no dia 1, refeição 2: 2.0 porções
+Alimento palmito no dia 2, refeição 0: 2.0 porções
+Alimento palmito no dia 2, refeição 2: 2.0 porções
+Alimento palmito no dia 3, refeição 1: 2.0 porções
+Alimento palmito no dia 3, refeição 2: 2.0 porções
+Alimento palmito no dia 4, refeição 1: 2.0 porções
+Alimento palmito no dia 4, refeição 2: 2.0 porções
+Alimento palmito no dia 5, refeição 0: 2.0 porções
+Alimento palmito no dia 5, refeição 1: 2.0 porções
+Alimento palmito no dia 6, refeição 0: 2.0 porções
+Alimento palmito no dia 6, refeição 2: 2.0 porções
+Alimento melancia no dia 0, refeição 2: 1.0 porções
+Alimento melancia no dia 1, refeição 2: 1.0 porções
+Alimento melancia no dia 2, refeição 2: 1.0 porções
+Alimento melancia no dia 3, refeição 2: 1.0 porções
+Alimento melancia no dia 4, refeição 2: 1.0 porções
+Alimento melancia no dia 5, refeição 2: 1.0 porções
+Alimento melancia no dia 6, refeição 2: 1.0 porções
+Alimento ovo no dia 0, refeição 1: 3.0 porções
+Alimento ovo no dia 0, refeição 2: 3.0 porções
+Alimento ovo no dia 1, refeição 1: 3.0 porções
+Alimento ovo no dia 1, refeição 2: 3.0 porções
+Alimento ovo no dia 2, refeição 1: 3.0 porções
+Alimento ovo no dia 2, refeição 2: 3.0 porções
+Alimento ovo no dia 3, refeição 1: 3.0 porções
+Alimento ovo no dia 3, refeição 2: 3.0 porções
+Alimento ovo no dia 4, refeição 0: 3.0 porções
+Alimento ovo no dia 4, refeição 1: 3.0 porções
+Alimento ovo no dia 5, refeição 0: 3.0 porções
+Alimento ovo no dia 5, refeição 1: 3.0 porções
+Alimento ovo no dia 6, refeição 0: 3.0 porções
+Alimento ovo no dia 6, refeição 1: 3.0 porções
+
+Dias em que os alimentos foram consumidos (Y[i,j]):
+Alimento farinhaDeTrigo foi consumido no dia 0
+Alimento farinhaDeTrigo foi consumido no dia 1
+Alimento farinhaDeTrigo foi consumido no dia 2
+Alimento farinhaDeTrigo foi consumido no dia 3
+Alimento farinhaDeTrigo foi consumido no dia 4
+Alimento farinhaDeTrigo foi consumido no dia 5
+Alimento farinhaDeTrigo foi consumido no dia 6
+Alimento abobora foi consumido no dia 0
+Alimento abobora foi consumido no dia 1
+Alimento abobora foi consumido no dia 2
+Alimento abobora foi consumido no dia 3
+Alimento abobora foi consumido no dia 4
+Alimento abobora foi consumido no dia 5
+Alimento abobora foi consumido no dia 6
+Alimento beterraba foi consumido no dia 0
+Alimento beterraba foi consumido no dia 1
+Alimento beterraba foi consumido no dia 2
+Alimento beterraba foi consumido no dia 3
+Alimento beterraba foi consumido no dia 4
+Alimento beterraba foi consumido no dia 5
+Alimento beterraba foi consumido no dia 6
+Alimento palmito foi consumido no dia 0
+Alimento palmito foi consumido no dia 1
+Alimento palmito foi consumido no dia 2
+Alimento palmito foi consumido no dia 3
+Alimento palmito foi consumido no dia 4
+Alimento palmito foi consumido no dia 5
+Alimento palmito foi consumido no dia 6
+Alimento melancia foi consumido no dia 0
+Alimento melancia foi consumido no dia 1
+Alimento melancia foi consumido no dia 2
+Alimento melancia foi consumido no dia 3
+Alimento melancia foi consumido no dia 4
+Alimento melancia foi consumido no dia 5
+Alimento melancia foi consumido no dia 6
+Alimento ovo foi consumido no dia 0
+Alimento ovo foi consumido no dia 1
+Alimento ovo foi consumido no dia 2
+Alimento ovo foi consumido no dia 3
+Alimento ovo foi consumido no dia 4
+Alimento ovo foi consumido no dia 5
+Alimento ovo foi consumido no dia 6
+
+Refeições em que os alimentos foram consumidos (Z[i,j,k]):
+Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 0
+Alimento farinhaDeTrigo foi consumido na refeição 1 do dia 0
+Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 1
+Alimento farinhaDeTrigo foi consumido na refeição 1 do dia 1
+Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 2
+Alimento farinhaDeTrigo foi consumido na refeição 1 do dia 2
+Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 3
+Alimento farinhaDeTrigo foi consumido na refeição 1 do dia 3
+Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 4
+Alimento farinhaDeTrigo foi consumido na refeição 1 do dia 4
+Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 5
+Alimento farinhaDeTrigo foi consumido na refeição 1 do dia 5
+Alimento farinhaDeTrigo foi consumido na refeição 0 do dia 6
+Alimento farinhaDeTrigo foi consumido na refeição 1 do dia 6
+Alimento abobora foi consumido na refeição 0 do dia 0
+Alimento abobora foi consumido na refeição 1 do dia 0
+Alimento abobora foi consumido na refeição 0 do dia 1
+Alimento abobora foi consumido na refeição 1 do dia 1
+Alimento abobora foi consumido na refeição 0 do dia 2
+Alimento abobora foi consumido na refeição 1 do dia 2
+Alimento abobora foi consumido na refeição 0 do dia 3
+Alimento abobora foi consumido na refeição 1 do dia 3
+Alimento abobora foi consumido na refeição 0 do dia 4
+Alimento abobora foi consumido na refeição 1 do dia 4
+Alimento abobora foi consumido na refeição 0 do dia 5
+Alimento abobora foi consumido na refeição 1 do dia 5
+Alimento abobora foi consumido na refeição 0 do dia 6
+Alimento abobora foi consumido na refeição 1 do dia 6
+Alimento beterraba foi consumido na refeição 0 do dia 0
+Alimento beterraba foi consumido na refeição 1 do dia 0
+Alimento beterraba foi consumido na refeição 0 do dia 1
+Alimento beterraba foi consumido na refeição 1 do dia 1
+Alimento beterraba foi consumido na refeição 1 do dia 2
+Alimento beterraba foi consumido na refeição 2 do dia 2
+Alimento beterraba foi consumido na refeição 1 do dia 3
+Alimento beterraba foi consumido na refeição 2 do dia 3
+Alimento beterraba foi consumido na refeição 1 do dia 4
+Alimento beterraba foi consumido na refeição 2 do dia 4
+Alimento beterraba foi consumido na refeição 1 do dia 5
+Alimento beterraba foi consumido na refeição 2 do dia 5
+Alimento beterraba foi consumido na refeição 1 do dia 6
+Alimento beterraba foi consumido na refeição 2 do dia 6
+Alimento palmito foi consumido na refeição 0 do dia 0
+Alimento palmito foi consumido na refeição 2 do dia 0
+Alimento palmito foi consumido na refeição 1 do dia 1
+Alimento palmito foi consumido na refeição 2 do dia 1
+Alimento palmito foi consumido na refeição 0 do dia 2
+Alimento palmito foi consumido na refeição 2 do dia 2
+Alimento palmito foi consumido na refeição 1 do dia 3
+Alimento palmito foi consumido na refeição 2 do dia 3
+Alimento palmito foi consumido na refeição 1 do dia 4
+Alimento palmito foi consumido na refeição 2 do dia 4
+Alimento palmito foi consumido na refeição 0 do dia 5
+Alimento palmito foi consumido na refeição 1 do dia 5
+Alimento palmito foi consumido na refeição 0 do dia 6
+Alimento palmito foi consumido na refeição 2 do dia 6
+Alimento melancia foi consumido na refeição 0 do dia 0
+Alimento melancia foi consumido na refeição 0 do dia 1
+Alimento melancia foi consumido na refeição 0 do dia 2
+Alimento melancia foi consumido na refeição 0 do dia 3
+Alimento melancia foi consumido na refeição 0 do dia 4
+Alimento melancia foi consumido na refeição 0 do dia 5
+Alimento melancia foi consumido na refeição 0 do dia 6
+Alimento ovo foi consumido na refeição 1 do dia 0
+Alimento ovo foi consumido na refeição 2 do dia 0
+Alimento ovo foi consumido na refeição 1 do dia 1
+Alimento ovo foi consumido na refeição 2 do dia 1
+Alimento ovo foi consumido na refeição 1 do dia 2
+Alimento ovo foi consumido na refeição 2 do dia 2
+Alimento ovo foi consumido na refeição 1 do dia 3
+Alimento ovo foi consumido na refeição 2 do dia 3
+Alimento ovo foi consumido na refeição 0 do dia 4
+Alimento ovo foi consumido na refeição 1 do dia 4
+Alimento ovo foi consumido na refeição 0 do dia 5
+Alimento ovo foi consumido na refeição 1 do dia 5
+Alimento ovo foi consumido na refeição 0 do dia 6
+Alimento ovo foi consumido na refeição 1 do dia 6

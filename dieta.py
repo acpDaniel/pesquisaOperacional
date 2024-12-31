@@ -4,6 +4,9 @@ from gurobipy import Model, GRB, quicksum
 # Carregar os dados da planilha
 df = pd.read_excel("alimentosCompleto.xlsx")
 
+# Valor grande para M
+M = 1e6
+
 # Parâmetros do problema
 alimentos = df['alimento'].tolist() #alimentos da planilha
 dias = 7  # número de dias
@@ -114,17 +117,60 @@ for j in range(dias):
         f"limite_total_porcoes_dia_{j}"
     )
 
+# Amarrar Z_{i,j,k} e Y_{i,j}
+for i in range(len(alimentos)):
+    for j in range(dias):
+        model.addConstr(
+            quicksum(Z[i, j, k] for k in range(refeicoes)) <= M * Y[i, j],
+            f"amarrar_Z_Y_{i}_dia_{j}"
+        )
+
+# Amarrar Z_{i,j,k} e X_{i,j,k}
+for i in range(len(alimentos)):
+    for j in range(dias):
+        for k in range(refeicoes):
+            model.addConstr(
+                Z[i, j, k] >= X[i, j, k] / M,
+                f"amarrar_Z_X_{i}_dia_{j}_ref_{k}"
+            )    
+
+# Amarrar Y_{i,j} e X_{i,j,k}
+for i in range(len(alimentos)):
+    for j in range(dias):
+        model.addConstr(
+            quicksum(X[i, j, k] for k in range(refeicoes)) >= Y[i, j],
+            f"amarrar_Y_X_{i}_dia_{j}"
+        )                    
+
 # Resolver o modelo
 model.optimize()
 
-# Verificar o status da solução
-if model.status == GRB.OPTIMAL:
-    print("Solução ótima encontrada!")
-    for i in range(len(alimentos)):
-        for j in range(dias):
-            for k in range(refeicoes):
-                if X[i,j,k].x > 0: #printa apenas as variáveis X que são diferentes de zero
-                    print(f"Alimento: {alimentos[i]}, Dia: {j+1}, Refeição: {k+1}, Porções: {X[i,j,k].x}")
-    print(f"\nCusto total da dieta: {model.objVal}")
-else:
-    print("Não foi possível encontrar uma solução ótima.")
+# Escrever os resultados em um arquivo (limpando o conteúdo antes de escrever novamente)
+with open("resultado.txt", "w") as arquivo:
+    # Verificar o status da solução
+    if model.status == GRB.OPTIMAL:
+        arquivo.write("Solução ótima encontrada!\n")
+        arquivo.write(f"Valor da função objetivo (custo total): {model.objVal}\n")
+        
+        # Variáveis de decisão
+        arquivo.write("\nPorções consumidas por refeição (X[i,j,k]):\n")
+        for i in range(len(alimentos)):
+            for j in range(dias):
+                for k in range(refeicoes):
+                    if X[i, j, k].x > 0:  # Mostrar apenas variáveis com valores positivos
+                        arquivo.write(f"Alimento {alimentos[i]} no dia {j}, refeição {k}: {X[i, j, k].x} porções\n")
+        
+        arquivo.write("\nDias em que os alimentos foram consumidos (Y[i,j]):\n")
+        for i in range(len(alimentos)):
+            for j in range(dias):
+                if Y[i, j].x > 0:
+                    arquivo.write(f"Alimento {alimentos[i]} foi consumido no dia {j}\n")
+        
+        arquivo.write("\nRefeições em que os alimentos foram consumidos (Z[i,j,k]):\n")
+        for i in range(len(alimentos)):
+            for j in range(dias):
+                for k in range(refeicoes):
+                    if Z[i, j, k].x > 0:
+                        arquivo.write(f"Alimento {alimentos[i]} foi consumido na refeição {k} do dia {j}\n")
+    else:
+        arquivo.write(f"Modelo não encontrado ou solução não ótima. Status: {model.status}\n")
