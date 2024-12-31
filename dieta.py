@@ -5,7 +5,7 @@ from gurobipy import Model, GRB, quicksum
 df = pd.read_excel("alimentosTeste.xlsx")
 
 # Valor grande para M
-M = 1000
+M = 50
 
 # Parâmetros do problema
 alimentos = df['alimento'].tolist() #alimentos da planilha
@@ -133,13 +133,14 @@ for i in range(len(alimentos)):
             f"amarrar_Y_X_{i}_dia_{j}"
         )               
 
-# # Garantir que pelo menos um alimento foi consumido em cada refeição de cada dia
-# for j in range(dias):  # Para cada dia
-#     for k in range(refeicoes):  # Para cada refeição
-#         model.addConstr(
-#             quicksum(Z[i, j, k] for i in range(len(alimentos))) >= 1,
-#             f"min_1_alimento_consumido_dia_{j}_refeicao_{k}"
-#         )    
+# Amarrar Z_{i,j,k} e X_{i,j,k}
+for i in range(len(alimentos)):
+    for j in range(dias):
+        for k in range(refeicoes):
+            model.addConstr(
+                M * Z[i, j, k] >= X[i, j, k] ,
+                f"amarrar_Z_X_{i}_dia_{j}_ref_{k}"
+            ) 
 
 # # Amarrar Z_{i,j,k} e Y_{i,j}
 # for i in range(len(alimentos)):
@@ -147,24 +148,7 @@ for i in range(len(alimentos)):
 #         model.addConstr(
 #             quicksum(Z[i, j, k] for k in range(refeicoes)) <= M * Y[i, j],
 #             f"amarrar_Z_Y_{i}_dia_{j}"
-#         )
-
-# Amarrar Z_{i,j,k} e X_{i,j,k}
-for i in range(len(alimentos)):
-    for j in range(dias):
-        for k in range(refeicoes):
-            model.addConstr(
-                Z[i, j, k] >= X[i, j, k] / M,
-                f"amarrar_Z_X_{i}_dia_{j}_ref_{k}"
-            )    
-
-
-# Amarrar Z_{i,j,k} e X_{i,j,k} para garantir que Z[i,j,k] = 0 se X[i,j,k] = 0
-for i in range(len(alimentos)):
-    for j in range(dias):
-        for k in range(refeicoes):
-            # Se Z[i,j,k] = 0, então X[i,j,k] = 0
-            model.addConstr(X[i, j, k] <= M * Z[i, j, k], f"Z_limita_X_{i}_dia_{j}_ref_{k}")                     
+#         )                              
 
 #Flag para ver mais logs
 #model.setParam("OutputFlag", 1)
