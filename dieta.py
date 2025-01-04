@@ -4,7 +4,7 @@ from gurobipy import Model, GRB, quicksum
 # Carregar os dados da planilha
 df = pd.read_excel("alimentosTeste.xlsx")
 
-# Valor grande para M
+# Valor suficientemente grande para M
 M = 50
 
 # Parâmetros do problema
@@ -68,14 +68,14 @@ for nutriente in nutrientes:
             f"{nutriente}_max_dia_{j}"
         )
 
-#Restrições porções minimas de grupos alimentares
+#Restrições porções minimas de grupos alimentares por dia
 #1-laticinios_acucar   2-frutas    3-horticolas    4-cereais_derivados_tuberculos  5-carne_peixe_ovos  6-leguminosas 7-oleos_gorduras
 min_porcoes_grupo = {
         1: 0,
-        2: 0,
-        3: 0,
+        2: 2,
+        3: 2,
         4: 0,
-        5: 0,
+        5: 5,
         6: 0,
         7: 0
     }
@@ -125,7 +125,7 @@ for j in range(dias):
             f"min_1_porção_consumida_dia_{j}_refeicao_{k}"
         )
 
-# Amarrar Y_{i,j} e X_{i,j,k}
+# Amarrar Yi,j e Xi,j,k. Garantir que ativamos o Y somente se o alimento i tiver uma quantidade X maior que 0.
 for i in range(len(alimentos)):
     for j in range(dias):
         model.addConstr(
@@ -133,7 +133,7 @@ for i in range(len(alimentos)):
             f"amarrar_Y_X_{i}_dia_{j}"
         )               
 
-# Amarrar Z_{i,j,k} e X_{i,j,k}
+# Amarrar Zi,j,k e Xi,j,k. Garantir que se estamos usando uma quantidade de porção X o Z dele está ativado.
 for i in range(len(alimentos)):
     for j in range(dias):
         for k in range(refeicoes):
@@ -150,11 +150,8 @@ for i in range(len(alimentos)):
 #             f"amarrar_Z_Y_{i}_dia_{j}"
 #         )                              
 
-#Flag para ver mais logs
-#model.setParam("OutputFlag", 1)
-
-#GAP aceitavel no resultado, se comentar aqui vai demorar muito tempo para a planilha completa
-#model.setParam("MIPGap", 0.04)
+#GAP aceitavel no resultado, em certos casos o modelo pode demorar bastante isso pode ser util
+model.setParam("MIPGap", 0.05)
 
 # Resolver o modelo
 model.optimize()
@@ -191,5 +188,16 @@ with open("resultado.txt", "w") as arquivo:
                 for i in range(len(alimentos)):
                     if Z[i, j, k].x > 0:
                         arquivo.write(f"  Alimento {alimentos[i]}\n")
+    elif model.status == GRB.INFEASIBLE:
+        arquivo.write("Modelo inviável. Identificando as restrições conflitantes...\n")
+        
+        # Identificar restrições problematicas
+        model.computeIIS()
+        arquivo.write("Restrições conflitantes:\n")
+        for constr in model.getConstrs():
+            if constr.IISConstr:
+                arquivo.write(f"  {constr.constrName}\n")
+
     else:
-        arquivo.write(f"Modelo não encontrado ou solução não ótima. Status: {model.status}\n")
+        arquivo.write(f"Deu ruim status: {model.status}\n")
+
