@@ -10,7 +10,7 @@ M = 50
 # Parâmetros do problema
 alimentos = df['alimento'].tolist() #alimentos da planilha
 dias = 7  # número de dias
-refeicoes = 3  # número de refeições por dia
+refeicoes = 4  # número de refeições por dia
 grupos = list(range(1, 8)) #quantidade de grupos
 
 # Nutrientes e limites
@@ -24,7 +24,7 @@ limites_nutrientes = {
     "magnesio": (400, 420),
     "vitamina_c": (75, 90),
     "zinco": (11, 16),
-    "sodio": (1500, 5000)
+    "sodio": (1500, 6000)
 }
 
 # Dados das colunas da planilha
@@ -166,8 +166,12 @@ with open("resultado.txt", "w") as arquivo:
         # Variáveis de decisão organizadas por dia e refeição
         arquivo.write("\nPorções consumidas por refeição (organizado por dia e refeição):\n")
         for j in range(dias):
+            arquivo.write(f"\nDia {j +1}:\n")
+            for nutriente in nutrientes:
+                total_nutriente = sum(df.loc[i, nutriente] * X[i, j, k].x for i in range(len(alimentos)) for k in range(refeicoes))
+                arquivo.write(f"  Total de {nutriente}: {total_nutriente:.2f}\n")
             for k in range(refeicoes):
-                arquivo.write(f"\nDia {j}, Refeição {k}:\n")
+                arquivo.write(f"\nDia {j+1}, Refeição {k+1}:\n")
                 for i in range(len(alimentos)):
                     if X[i, j, k].x > 0:  # Mostrar apenas variáveis com valores positivos
                         arquivo.write(f"  Alimento {alimentos[i]}: {X[i, j, k].x} porções\n")
@@ -175,7 +179,7 @@ with open("resultado.txt", "w") as arquivo:
         # Dias em que os alimentos foram consumidos
         arquivo.write("\nDias em que os alimentos foram consumidos (Y[i,j]):\n")
         for j in range(dias):
-            arquivo.write(f"\nDia {j}:\n")
+            arquivo.write(f"\nDia {j+1}:\n")
             for i in range(len(alimentos)):
                 if Y[i, j].x > 0:
                     arquivo.write(f"  Alimento {alimentos[i]}\n")
@@ -184,7 +188,7 @@ with open("resultado.txt", "w") as arquivo:
         arquivo.write("\nRefeições em que os alimentos foram consumidos (Z[i,j,k]):\n")
         for j in range(dias):
             for k in range(refeicoes):
-                arquivo.write(f"\nDia {j}, Refeição {k}:\n")
+                arquivo.write(f"\nDia {j+1}, Refeição {k+1}:\n")
                 for i in range(len(alimentos)):
                     if Z[i, j, k].x > 0:
                         arquivo.write(f"  Alimento {alimentos[i]}\n")
