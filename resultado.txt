@@ -1,1 +1,369 @@
-Status desconhecido ou solução não ótima: 11
+Limite de tempo atingido. Apresentando a melhor solução encontrada até o momento:
+Tempo total de execução: 10800.47 segundos
+MIPGap atual: 7.16%
+Valor da função objetivo (custo total): 193.45700000000002
+
+Porções consumidas por refeição (organizado por dia e refeição):
+
+Dia 1:
+  Total de calorias: 3075.00
+  Total de carboidratos: 455.10
+  Total de proteinas: 149.60
+  Total de gorduras: 73.00
+  Total de ferro: 17.10
+  Total de magnesio: 409.00
+  Total de vitamina_c: 89.40
+  Total de zinco: 16.00
+  Total de sodio: 1525.00
+
+Dia 1, Refeição 1:
+  Alimento cereais: 1.0 porções
+  Alimento batataInglesa: 1.0 porções
+
+Dia 1, Refeição 2:
+  Alimento limao: 1.0 porções
+  Alimento melancia: 6.0 porções
+
+Dia 1, Refeição 3:
+  Alimento macarrão: 3.0 porções
+  Alimento beterraba: 9.0 porções
+
+Dia 1, Refeição 4:
+  Alimento ovo: 7.0 porções
+
+Dia 2:
+  Total de calorias: 3192.00
+  Total de carboidratos: 473.10
+  Total de proteinas: 148.10
+  Total de gorduras: 75.20
+  Total de ferro: 16.40
+  Total de magnesio: 407.00
+  Total de vitamina_c: 83.10
+  Total de zinco: 14.30
+  Total de sodio: 1619.00
+
+Dia 2, Refeição 1:
+  Alimento ovo: 7.0 porções
+
+Dia 2, Refeição 2:
+  Alimento arroz: 1.0 porções
+  Alimento macarrão: 4.0 porções
+
+Dia 2, Refeição 3:
+  Alimento palmito: 1.0 porções
+
+Dia 2, Refeição 4:
+  Alimento abobora: 1.0 porções
+  Alimento mandioca: 1.0 porções
+  Alimento limao: 1.0 porções
+  Alimento melancia: 2.0 porções
+
+Dia 3:
+  Total de calorias: 3153.00
+  Total de carboidratos: 466.10
+  Total de proteinas: 135.70
+  Total de gorduras: 81.90
+  Total de ferro: 16.50
+  Total de magnesio: 417.00
+  Total de vitamina_c: 86.10
+  Total de zinco: 14.70
+  Total de sodio: 1519.00
+
+Dia 3, Refeição 1:
+  Alimento cereais: 1.0 porções
+
+Dia 3, Refeição 2:
+  Alimento arroz: 2.0 porções
+  Alimento polvilho: 2.0 porções
+  Alimento limao: 2.0 porções
+  Alimento ovo: 8.0 porções
+
+Dia 3, Refeição 3:
+  Alimento beterraba: 3.0 porções
+
+Dia 3, Refeição 4:
+  Alimento melancia: 1.0 porções
+
+Dia 4:
+  Total de calorias: 3230.00
+  Total de carboidratos: 458.10
+  Total de proteinas: 141.70
+  Total de gorduras: 88.50
+  Total de ferro: 17.00
+  Total de magnesio: 411.00
+  Total de vitamina_c: 75.30
+  Total de zinco: 15.90
+  Total de sodio: 1504.00
+
+Dia 4, Refeição 1:
+  Alimento milho: 3.0 porções
+  Alimento limao: 1.0 porções
+
+Dia 4, Refeição 2:
+  Alimento arroz: 1.0 porções
+  Alimento mandioca: 1.0 porções
+  Alimento ovo: 9.0 porções
+
+Dia 4, Refeição 3:
+  Alimento melancia: 2.0 porções
+
+Dia 4, Refeição 4:
+  Alimento beterraba: 7.0 porções
+
+Dia 5:
+  Total de calorias: 3294.00
+  Total de carboidratos: 450.10
+  Total de proteinas: 129.90
+  Total de gorduras: 111.90
+  Total de ferro: 17.60
+  Total de magnesio: 406.00
+  Total de vitamina_c: 85.10
+  Total de zinco: 11.50
+  Total de sodio: 1561.00
+
+Dia 5, Refeição 1:
+  Alimento abobora: 3.0 porções
+  Alimento melancia: 4.0 porções
+  Alimento ovo: 5.0 porções
+
+Dia 5, Refeição 2:
+  Alimento milho: 3.0 porções
+
+Dia 5, Refeição 3:
+  Alimento amendoim: 1.0 porções
+
+Dia 5, Refeição 4:
+  Alimento limao: 1.0 porções
+  Alimento achocolatado: 1.0 porções
+  Alimento atum: 1.0 porções
+
+Dia 6:
+  Total de calorias: 3072.00
+  Total de carboidratos: 456.00
+  Total de proteinas: 138.20
+  Total de gorduras: 75.30
+  Total de ferro: 14.80
+  Total de magnesio: 416.00
+  Total de vitamina_c: 80.20
+  Total de zinco: 13.90
+  Total de sodio: 1595.00
+
+Dia 6, Refeição 1:
+  Alimento arroz: 2.0 porções
+  Alimento palmito: 1.0 porções
+
+Dia 6, Refeição 2:
+  Alimento melancia: 3.0 porções
+  Alimento ovo: 7.0 porções
+
+Dia 6, Refeição 3:
+  Alimento abobora: 2.0 porções
+  Alimento limao: 1.0 porções
+
+Dia 6, Refeição 4:
+  Alimento canjica: 3.0 porções
+
+Dia 7:
+  Total de calorias: 3192.00
+  Total de carboidratos: 473.10
+  Total de proteinas: 148.10
+  Total de gorduras: 75.20
+  Total de ferro: 16.40
+  Total de magnesio: 407.00
+  Total de vitamina_c: 83.10
+  Total de zinco: 14.30
+  Total de sodio: 1619.00
+
+Dia 7, Refeição 1:
+  Alimento abobora: 1.0 porções
+  Alimento palmito: 1.0 porções
+  Alimento ovo: 7.0 porções
+
+Dia 7, Refeição 2:
+  Alimento arroz: 1.0 porções
+  Alimento mandioca: 1.0 porções
+  Alimento limao: 1.0 porções
+
+Dia 7, Refeição 3:
+  Alimento melancia: 2.0 porções
+
+Dia 7, Refeição 4:
+  Alimento macarrão: 4.0 porções
+
+Dias em que os alimentos foram consumidos (Y[i,j]):
+
+Dia 1:
+  Alimento macarrão
+  Alimento cereais
+  Alimento batataInglesa
+  Alimento beterraba
+  Alimento limao
+  Alimento melancia
+  Alimento ovo
+
+Dia 2:
+  Alimento arroz
+  Alimento macarrão
+  Alimento abobora
+  Alimento mandioca
+  Alimento palmito
+  Alimento limao
+  Alimento melancia
+  Alimento ovo
+
+Dia 3:
+  Alimento arroz
+  Alimento cereais
+  Alimento beterraba
+  Alimento polvilho
+  Alimento limao
+  Alimento melancia
+  Alimento ovo
+
+Dia 4:
+  Alimento arroz
+  Alimento milho
+  Alimento beterraba
+  Alimento mandioca
+  Alimento limao
+  Alimento melancia
+  Alimento ovo
+
+Dia 5:
+  Alimento milho
+  Alimento abobora
+  Alimento limao
+  Alimento melancia
+  Alimento achocolatado
+  Alimento amendoim
+  Alimento ovo
+  Alimento atum
+
+Dia 6:
+  Alimento arroz
+  Alimento canjica
+  Alimento abobora
+  Alimento palmito
+  Alimento limao
+  Alimento melancia
+  Alimento ovo
+
+Dia 7:
+  Alimento arroz
+  Alimento macarrão
+  Alimento abobora
+  Alimento mandioca
+  Alimento palmito
+  Alimento limao
+  Alimento melancia
+  Alimento ovo
+
+Refeições em que os alimentos foram consumidos (Z[i,j,k]):
+
+Dia 1, Refeição 1:
+  Alimento cereais
+  Alimento batataInglesa
+
+Dia 1, Refeição 2:
+  Alimento limao
+  Alimento melancia
+
+Dia 1, Refeição 3:
+  Alimento macarrão
+  Alimento beterraba
+
+Dia 1, Refeição 4:
+  Alimento ovo
+
+Dia 2, Refeição 1:
+  Alimento ovo
+
+Dia 2, Refeição 2:
+  Alimento arroz
+  Alimento macarrão
+
+Dia 2, Refeição 3:
+  Alimento palmito
+
+Dia 2, Refeição 4:
+  Alimento abobora
+  Alimento mandioca
+  Alimento limao
+  Alimento melancia
+
+Dia 3, Refeição 1:
+  Alimento cereais
+
+Dia 3, Refeição 2:
+  Alimento arroz
+  Alimento polvilho
+  Alimento limao
+  Alimento ovo
+
+Dia 3, Refeição 3:
+  Alimento beterraba
+
+Dia 3, Refeição 4:
+  Alimento melancia
+
+Dia 4, Refeição 1:
+  Alimento milho
+  Alimento limao
+
+Dia 4, Refeição 2:
+  Alimento arroz
+  Alimento mandioca
+  Alimento ovo
+
+Dia 4, Refeição 3:
+  Alimento melancia
+
+Dia 4, Refeição 4:
+  Alimento beterraba
+
+Dia 5, Refeição 1:
+  Alimento abobora
+  Alimento melancia
+  Alimento ovo
+
+Dia 5, Refeição 2:
+  Alimento milho
+
+Dia 5, Refeição 3:
+  Alimento amendoim
+
+Dia 5, Refeição 4:
+  Alimento limao
+  Alimento achocolatado
+  Alimento atum
+
+Dia 6, Refeição 1:
+  Alimento arroz
+  Alimento palmito
+
+Dia 6, Refeição 2:
+  Alimento melancia
+  Alimento ovo
+
+Dia 6, Refeição 3:
+  Alimento abobora
+  Alimento limao
+
+Dia 6, Refeição 4:
+  Alimento canjica
+
+Dia 7, Refeição 1:
+  Alimento abobora
+  Alimento palmito
+  Alimento ovo
+
+Dia 7, Refeição 2:
+  Alimento arroz
+  Alimento mandioca
+  Alimento limao
+
+Dia 7, Refeição 3:
+  Alimento melancia
+
+Dia 7, Refeição 4:
+  Alimento macarrão
