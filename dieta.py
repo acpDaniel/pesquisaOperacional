@@ -2,7 +2,7 @@ import pandas as pd
 from gurobipy import Model, GRB, quicksum
 
 # Carregar os dados da planilha
-df = pd.read_excel("alimentosTeste.xlsx")
+df = pd.read_excel("alimentosCompleto.xlsx")
 
 # Valor suficientemente grande para M
 M = 50
@@ -72,9 +72,9 @@ for nutriente in nutrientes:
 #1-laticinios_acucar   2-frutas    3-horticolas    4-cereais_derivados_tuberculos  5-carne_peixe_ovos  6-leguminosas 7-oleos_gorduras
 min_porcoes_grupo = {
         1: 0,
-        2: 2,
-        3: 2,
-        4: 0,
+        2: 3,
+        3: 3,
+        4: 2,
         5: 5,
         6: 0,
         7: 0
@@ -125,14 +125,6 @@ for j in range(dias):
             f"min_1_porção_consumida_dia_{j}_refeicao_{k}"
         )
 
-# Amarrar Yi,j e Xi,j,k. Garantir que ativamos o Y somente se o alimento i tiver uma quantidade X maior que 0.
-for i in range(len(alimentos)):
-    for j in range(dias):
-        model.addConstr(
-            quicksum(X[i, j, k] for k in range(refeicoes)) >= Y[i, j],
-            f"amarrar_Y_X_{i}_dia_{j}"
-        )               
-
 # Amarrar Zi,j,k e Xi,j,k. Garantir que se estamos usando uma quantidade de porção X o Z dele está ativado.
 for i in range(len(alimentos)):
     for j in range(dias):
@@ -140,27 +132,37 @@ for i in range(len(alimentos)):
             model.addConstr(
                 M * Z[i, j, k] >= X[i, j, k] ,
                 f"amarrar_Z_X_{i}_dia_{j}_ref_{k}"
-            ) 
+            )         
 
-# # Amarrar Z_{i,j,k} e Y_{i,j}
-# for i in range(len(alimentos)):
-#     for j in range(dias):
-#         model.addConstr(
-#             quicksum(Z[i, j, k] for k in range(refeicoes)) <= M * Y[i, j],
-#             f"amarrar_Z_Y_{i}_dia_{j}"
-#         )                              
+# Amarrar Yi,j e Xi,j,k. Garantir que ativamos o Y somente se o alimento i tiver uma quantidade X maior que 0.
+for i in range(len(alimentos)):
+    for j in range(dias):
+        model.addConstr(
+            quicksum(X[i, j, k] for k in range(refeicoes)) >= Y[i, j],
+            f"amarrar_Y_X_{i}_dia_{j}"
+        )                                                
 
-#GAP aceitavel no resultado, em certos casos o modelo pode demorar bastante isso pode ser util
-model.setParam("MIPGap", 0.05)
+#Configurações de parada do modelo
+model.setParam("MIPGap", 0.04)
+model.setParam("TimeLimit", 10800)
 
 # Resolver o modelo
 model.optimize()
 
 # Escrever os resultados em um arquivo (limpando o conteúdo antes de escrever novamente)
 with open("resultado.txt", "w") as arquivo:
-    # Verificar o status da solução
+
     if model.status == GRB.OPTIMAL:
-        arquivo.write("Solução ótima encontrada!\n")
+        arquivo.write("Solução ótima encontrada devido ao atingimento do MIPGap ou conclusão satisfatória!\n")
+    elif model.status == GRB.TIME_LIMIT:
+        arquivo.write("Limite de tempo atingido. Apresentando a melhor solução encontrada até o momento:\n")
+    else:
+        arquivo.write(f"Status desconhecido ou solução não ótima: {model.status}\n")
+
+    # Verificar o status da solução
+    if model.status == GRB.OPTIMAL or model.status == GRB.TIME_LIMIT:
+        arquivo.write(f"Tempo total de execução: {model.Runtime:.2f} segundos\n")
+        arquivo.write(f"MIPGap atual: {model.MIPGap * 100:.2f}%\n")
         arquivo.write(f"Valor da função objetivo (custo total): {model.objVal}\n")
         
         # Variáveis de decisão organizadas por dia e refeição
@@ -201,7 +203,3 @@ with open("resultado.txt", "w") as arquivo:
         for constr in model.getConstrs():
             if constr.IISConstr:
                 arquivo.write(f"  {constr.constrName}\n")
-
-    else:
-        arquivo.write(f"Deu ruim status: {model.status}\n")
-
