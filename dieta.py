@@ -106,7 +106,7 @@ for i in range(len(alimentos)):
 for i in range(len(alimentos)):
     for j in range(dias):
         model.addConstr(
-            quicksum(Z[i,j,k] for k in range(refeicoes)) <= 1 * Y[i,j],
+            quicksum(Z[i,j,k] for k in range(refeicoes)) <= 2 * Y[i,j],
             f"max_refeicoes_alimento_{i}_dia_{j}"
         )
 
@@ -125,14 +125,23 @@ for j in range(dias):
             f"min_1_porção_consumida_dia_{j}_refeicao_{k}"
         )
 
-# Amarrar Zi,j,k e Xi,j,k. Garantir que se estamos usando uma quantidade de porção X o Z dele está ativado.
+# Amarrar Zi,j,k e Xi,j,k. Garantir que se X > 0 , o Z dele está ativado.
 for i in range(len(alimentos)):
     for j in range(dias):
         for k in range(refeicoes):
             model.addConstr(
                 M * Z[i, j, k] >= X[i, j, k] ,
                 f"amarrar_Z_X_{i}_dia_{j}_ref_{k}"
-            )         
+            )
+
+# Garantir que Zi,j,k seja 0 se Xi,j,k é 0.
+for i in range(len(alimentos)):
+    for j in range(dias):
+        for k in range(refeicoes):
+            model.addConstr(
+                X[i, j, k] >= Z[i, j, k],
+                f"desativar_Z_se_X_zero_{i}_dia_{j}_ref_{k}"
+            )
 
 # Amarrar Yi,j e Xi,j,k. Garantir que ativamos o Y somente se o alimento i tiver uma quantidade X maior que 0.
 for i in range(len(alimentos)):
@@ -144,7 +153,7 @@ for i in range(len(alimentos)):
 
 #Configurações de parada do modelo
 model.setParam("MIPGap", 0.04)
-model.setParam("TimeLimit", 10800)
+model.setParam("TimeLimit", 3600)
 
 # Resolver o modelo
 model.optimize()
